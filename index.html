@@ -3,8 +3,35 @@
 <head>
   <script src="//embed.typeform.com/next/embed.js"></script>
   <link rel="stylesheet" href="//embed.typeform.com/next/css/widget.css">
+  <style>
+    body { margin: 0; }
+    #error {
+      display: none;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #e74c3c;
+    }
+  </style>
 </head>
 <body>
-  <div data-tf-widget="X6jRj730" style="width:100%;height:100vh;"></div>
+  <div id="form-container" style="width:100%;height:100vh;"></div>
+  <div id="error">
+    <h2>Form ID eksik!</h2>
+    <p>Kullanım: <code>https://mustafagoit.github.io/typeform-site/?form=FORM_ID</code></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const formId = params.get('form');
+
+    if (formId) {
+      const container = document.getElementById('form-container');
+      container.setAttribute('data-tf-widget', formId);
+    } else {
+      document.getElementById('form-container').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
